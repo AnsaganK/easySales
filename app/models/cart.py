@@ -26,10 +26,15 @@ class Cart(BaseModel):
 
 
 class CartItem(BaseModel):
+    class ViaChoices(models.TextChoices):
+        SITE = 'site', 'Сайт'
+        TELEGRAM = 'telegram', 'Телеграм'
+
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart_items')
     quantity = models.IntegerField(default=1)
-
+    via = models.CharField(max_length=64, choices=ViaChoices.choices, default=ViaChoices.SITE)
+    
     class Meta:
         verbose_name = 'Товар в корзине'
         verbose_name_plural = 'Товары в корзине'

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
     Корзина
 {% endblock %}
@@ -35,134 +35,72 @@
 
                         </div>
                         <div class="col-lg-4 col-md-3 col-12">
-                            <p>Product Name</p>
+                            <p>Наименование</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>Quantity</p>
+                            <p>Кол-во</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>Subtotal</p>
+                            <p>Цена</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>Discount</p>
+                            <p>Дата создания</p>
                         </div>
                         <div class="col-lg-1 col-md-2 col-12">
-                            <p>Remove</p>
+                            <p>Удалить</p>
                         </div>
                     </div>
                 </div>
                 <!-- End Cart List Title -->
                 <!-- Cart Single List list -->
-                <div class="cart-single-list">
-                    <div class="row align-items-center">
-                        <div class="col-lg-1 col-md-1 col-12">
-                            <a href="product-details.html"><img src="assets/images/cart/01.jpg" alt="#"></a>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-12">
-                            <h5 class="product-name"><a href="product-details.html">
-                                Canon EOS M50 Mirrorless Camera</a></h5>
-                            <p class="product-des">
-                                <span><em>Type:</em> Mirrorless</span>
-                                <span><em>Color:</em> Black</span>
-                            </p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <div class="count-input">
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                {% for cart_item in cart_items %}
+                    <div class="cart-single-list">
+                        <div class="row align-items-center">
+                            <div class="col-lg-1 col-md-1 col-12">
+                                <a href="#">
+                                    <img src="{% if cart_item.product.img %}
+{{ cart_item.product.img.url }}{% else %}{% static 'app/images/no_product.png' %}{% endif %}"
+                                         alt="#">
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-3 col-12">
+                                <h5 class="product-name">
+                                    <a href="#">{{ cart_item.product.name }}</a>
+                                </h5>
+                                <p class="product-des">
+                                    <span><em>Тип: </em> {{ cart_item.product.subcategory.name }}</span>
+                                </p>
+                                <p class="product-des">
+                                    <span class="d-flex align-items-center">
+                                        {% if cart_item.via == 'telegram' %}
+                                            <i class="lni lni-telegram lni-32 text-primary" style="margin-left: -40px; margin-top: -100px" title="Через telegram"></i>
+                                        {% else %}
+                                            <i class="lni lni-website lni-32 text-warning" style="margin-left: -40px; margin-top: -100px" title="Через сайт"></i>
+                                        {% endif %}</span>
+                                </p>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <div class="count-input">
+                                    <input type="number" class="form-control" style="width: 70px; height: 33px"
+                                           value="{{ cart_item.quantity }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <p>{{ cart_item.get_sum }} рублей</p>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <p>
+                                    {{ cart_item.created_at }}<br>
+                                    <span style="font-size: 10px">Изменен: {{ cart_item.updated_at }}</span>
+                                </p>
+                            </div>
+                            <div class="col-lg-1 col-md-2 col-12">
+                                <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>$910.00</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>$29.00</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-                        </div>
                     </div>
-                </div>
-                <!-- End Single List list -->
-                <!-- Cart Single List list -->
-                <div class="cart-single-list">
-                    <div class="row align-items-center">
-                        <div class="col-lg-1 col-md-1 col-12">
-                            <a href="product-details.html"><img src="assets/images/cart/02.jpg" alt="#"></a>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-12">
-                            <h5 class="product-name"><a href="product-details.html">
-                                Apple iPhone X 256 GB Space Gray</a></h5>
-                            <p class="product-des">
-                                <span><em>Memory:</em> 256 GB</span>
-                                <span><em>Color:</em> Space Gray</span>
-                            </p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <div class="count-input">
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>$1100.00</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>—</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single List list -->
-                <!-- Cart Single List list -->
-                <div class="cart-single-list">
-                    <div class="row align-items-center">
-                        <div class="col-lg-1 col-md-1 col-12">
-                            <a href="product-details.html"><img src="assets/images/cart/03.jpg" alt="#"></a>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-12">
-                            <h5 class="product-name"><a href="product-details.html">HP LaserJet Pro Laser Printer</a>
-                            </h5>
-                            <p class="product-des">
-                                <span><em>Type:</em> Laser</span>
-                                <span><em>Color:</em> White</span>
-                            </p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <div class="count-input">
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>$550.00</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>—</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single List list -->
+                    <!-- End Single List list -->
+                {% endfor %}
             </div>
             <div class="row">
                 <div class="col-12">
@@ -170,28 +108,16 @@
                     <div class="total-amount">
                         <div class="row">
                             <div class="col-lg-8 col-md-6 col-12">
-                                <div class="left">
-                                    <div class="coupon">
-                                        <form action="#" target="_blank">
-                                            <input name="Coupon" placeholder="Enter Your Coupon">
-                                            <div class="button">
-                                                <button class="btn">Apply Coupon</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="right">
                                     <ul>
-                                        <li>Cart Subtotal<span>$2560.00</span></li>
-                                        <li>Shipping<span>Free</span></li>
-                                        <li>You Save<span>$29.00</span></li>
-                                        <li class="last">You Pay<span>$2531.00</span></li>
+                                        <li>Всего: <span>{{ cart.get_total_price }}</span> рублей</li>
                                     </ul>
                                     <div class="button">
-                                        <a href="checkout.html" class="btn">Checkout</a>
-                                        <a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
+                                        <a href="#" class="btn bg-burgundy">Оформить</a>
+                                        <a href="{% url 'app:home' %}" class="btn btn-alt hover-bg-burgundy">Продолжить
+                                            покупки</a>
                                     </div>
                                 </div>
                             </div>

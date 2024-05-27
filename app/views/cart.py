@@ -8,5 +8,6 @@ def cart_detail(request):
     cart = user.cart
 
     return render(request, 'app/cart/detail.html', {
-        'cart': cart
+        'cart': cart,
+        'cart_items': cart.items.all(),
     })
