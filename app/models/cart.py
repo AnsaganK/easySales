@@ -33,6 +33,7 @@ class CartItem(BaseModel):
     class Meta:
         verbose_name = 'Товар в корзине'
         verbose_name_plural = 'Товары в корзине'
+        unique_together = [['cart', 'product']]
 
     def __str__(self):
         return f'Продукт из корзины #{self.cart.id}'
