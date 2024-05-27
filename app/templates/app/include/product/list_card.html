@@ -7,9 +7,9 @@
 {% static 'app/images/no_product.png' %}{% endif %}"
                      alt="#" height="200px">
                 <div class="button">
-                    <a href="product-details.html" class="btn"><i
-                            class="lni lni-cart"></i> Add to
-                        Cart</a>
+                    <a class="btn bg-burgundy" data-bs-toggle="modal" data-bs-target="#addToCartModal"
+                       onclick="addToCart(this)" data-name="{{ product.name }}" data-id="{{ product.id }}" data-price="{{ product.price }}"><i
+                            class="lni lni-cart"></i> Добавить в корзину</a>
                 </div>
             </div>
         </div>
@@ -17,10 +17,10 @@
             <div class="product-info">
                 <span class="category">{{ product.subcategory.name }}</span>
                 <h4 class="title">
-                    <a href="product-grids.html">{{ product.name }}</a>
+                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                 </h4>
                 <div class="price">
-                    <span>{{ product.price }} Р.</span>
+                    <span class="text-burgundy">{{ product.price }} Р.</span>
                 </div>
             </div>
         </div>

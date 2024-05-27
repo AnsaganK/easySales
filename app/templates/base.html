@@ -233,8 +233,11 @@
                                                     <div class="content">
                                                         <h4><a href="product-details.html">
                                                             {{ item.product.name }}</a></h4>
-                                                        <p class="quantity">1x - <span
-                                                                class="amount">{{ item.product.price }} Р.</span></p>
+                                                        <p class="quantity">{{ item.quantity }} * <span
+                                                                class="amount">{{ item.product.price }} Р.</span>
+                                                            <br>
+                                                            <span class="text-burgundy">{{ item.get_sum }} рублей</span>
+                                                        </p>
                                                     </div>
                                                 </li>
                                             {% endfor %}
@@ -242,10 +245,10 @@
                                         <div class="bottom">
                                             <div class="total">
                                                 <span>Total</span>
-                                                <span class="total-amount">$134.00</span>
+                                                <span class="total-amount">{{ request.user.cart.get_total_price }} рублей</span>
                                             </div>
                                             <div class="button">
-                                                <a href="checkout.html" class="btn animate">Checkout</a>
+                                                <a href="#" class="btn animate bg-burgundy">Оформить</a>
                                             </div>
                                         </div>
                                     </div>
@@ -484,6 +487,9 @@
         }
     });
 </script>
+{% block script %}
+
+{% endblock %}
 </body>
 
 </html>

@@ -16,6 +16,9 @@ urlpatterns = [
     path('user/verify/<uuid:uuid>', views.verify_user, name='verify_user'),
     path('user/logout', views.logout_user, name='logout'),
 
+    # Product
+    path('cart/add', views.add_to_cart, name='add_to_cart'),
+    
     # Cart
     path('cart', views.cart_detail, name='cart_detail'),
 ]

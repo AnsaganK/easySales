@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    {{ category.name }}
+    {{ selected_subcategory.name|default:category.name }}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -11,13 +11,18 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content d-flex align-items-center">
-                        <h1 class="page-title">{{ category.name }}</h1>
+                        <h1 class="page-title">{{ selected_subcategory.name|default:category.name }}</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="{% url 'app:home' %}"><i class="lni lni-home"></i> Главная</a></li>
-                        <li>{{ category.name }}</li>
+                        {% if selected_subcategory %}
+                            <li>
+                                <a href="{{ selected_subcategory.category.get_absolute_url }}"> {{ selected_subcategory.category.name }}</a>
+                            </li>
+                        {% endif %}
+                        <li>{{ selected_subcategory.name|default:category.name }}</li>
                     </ul>
                 </div>
             </div>
@@ -26,6 +31,8 @@
 {% endblock %}
 
 {% block content %}
+    {% include 'app/include/cart/modal.html' %}
+
     <section class="product-grids section">
         <div class="container">
             <div class="row">
@@ -48,7 +55,8 @@
                             <ul class="list">
                                 {% for subcategory in subcategories %}
                                     <li>
-                                        <a href="{{ subcategory.get_absolute_url }}">{{ subcategory.name }}</a><span>({{ subcategory.products.count }})</span>
+                                        <a href="{{ subcategory.get_absolute_url }}"
+                                           {% if selected_subcategory == subcategory %}class="text-burgundy"{% endif %}>{{ subcategory.name }}</a><span>({{ subcategory.products.count }})</span>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -99,14 +107,14 @@
                                     <div class="product-sorting">
                                         <label for="sorting">Сортировать:</label>
                                         <select class="form-control" id="sorting">
-                                            <option>Popularity</option>
-                                            <option>Low - High Price</option>
-                                            <option>High - Low Price</option>
+                                            <option>Популярность</option>
+                                            <option>Цена - По возвр.</option>
+                                            <option>Цена - По убыв.</option>
                                             <option>Average Rating</option>
-                                            <option>A - Z Order</option>
-                                            <option>Z - A Order</option>
+                                            <option>А - Я</option>
+                                            <option>Я - А</option>
                                         </select>
-                                        <h3 class="total-show-product">Showing: <span>1 - 12 items</span></h3>
+                                        <h3 class="total-show-product">Показано : <span>1 - 12 товаров</span></h3>
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-4 col-12">
@@ -169,4 +177,35 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function addToCart(elem) {
+            let name = elem.dataset.name;
+            let id = elem.dataset.id;
+            let price = elem.dataset.price;
+
+            let product_id_input = document.getElementById('product_id');
+            let amount_input = document.getElementById('amount_input');
+            let product_name_span = document.getElementById('product_name');
+            amount_input.dataset.price = price;
+            let event = new Event('change', {})
+            amount_input.dispatchEvent(event);
+            product_name_span.innerHTML = name;
+            product_id_input.value = id;
+        }
+
+        function setPrice(elem) {
+            let price = elem.dataset.price;
+            let amount = elem.value;
+
+            price = price.replace(",", ".");
+
+            price = parseFloat(price);
+            amount = parseFloat(amount);
+            let total_sum_span = document.getElementById('total_sum');
+            total_sum_span.innerHTML = `${price} * ${amount} = ${price * amount} рублей`;
+        }
+    </script>
 {% endblock %}

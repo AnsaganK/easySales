@@ -1,0 +1,32 @@
+<div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    Добавить в корзину: <span id="product_name" class="text-burgundy"></span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'app:add_to_cart' %}" method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div>
+                        <input type="number" id="product_id" class="d-none" name="product">
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Кол-во</label>
+                        <input type="number" name="quantity" class="form-control" value="1" id="amount_input"
+                               onchange="setPrice(this)">
+                    </div>
+                    <div>
+                        Итоговая сумма: <span id="total_sum" class="text-burgundy"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn bg-burgundy text-white">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
