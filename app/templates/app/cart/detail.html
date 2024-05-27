@@ -73,9 +73,12 @@
                                 <p class="product-des">
                                     <span class="d-flex align-items-center">
                                         {% if cart_item.via == 'telegram' %}
-                                            <i class="lni lni-telegram lni-32 text-primary" style="margin-left: -40px; margin-top: -100px" title="Через telegram"></i>
+                                            <i class="lni lni-telegram lni-32 text-primary"
+                                               style="margin-left: -40px; margin-top: -100px"
+                                               title="Через telegram"></i>
                                         {% else %}
-                                            <i class="lni lni-website lni-32 text-warning" style="margin-left: -40px; margin-top: -100px" title="Через сайт"></i>
+                                            <i class="lni lni-website lni-32 text-warning"
+                                               style="margin-left: -40px; margin-top: -100px" title="Через сайт"></i>
                                         {% endif %}</span>
                                 </p>
                             </div>
@@ -95,7 +98,8 @@
                                 </p>
                             </div>
                             <div class="col-lg-1 col-md-2 col-12">
-                                <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
+                                <a class="remove-item" href="{% url 'app:delete_cart_item' cart_item.product.id %}"><i
+                                        class="lni lni-close"></i></a>
                             </div>
                         </div>
                     </div>

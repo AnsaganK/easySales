@@ -18,6 +18,7 @@ class Cart(BaseModel):
     def __str__(self):
         return f'Корзина пользователя "{self.user.get_full_name()}"'
 
+    @property
     def get_total_price(self):
         total = self.items.aggregate(
             total_price=Sum(F('product__price') * F('quantity'), output_field=models.DecimalField())
@@ -34,7 +35,7 @@ class CartItem(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart_items')
     quantity = models.IntegerField(default=1)
     via = models.CharField(max_length=64, choices=ViaChoices.choices, default=ViaChoices.SITE)
-    
+
     class Meta:
         verbose_name = 'Товар в корзине'
         verbose_name_plural = 'Товары в корзине'
