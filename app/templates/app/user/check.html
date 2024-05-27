@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Войти
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="breadcrumbs-content d-flex align-items-center">
+                        <h1 class="page-title">Войти</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <ul class="breadcrumb-nav">
+                        <li><a href="{% url 'app:home' %}"><i class="lni lni-home"></i> Главная</a></li>
+                        <li>Войти</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="account-login section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+                    <form class="card login-form" method="post">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <div class="title">
+                                <h3>Получить код</h3>
+                                <p>Вы можете войти указав свой ник в telegram</p>
+                            </div>
+                            <div class="form-group input-group">
+                                <label for="reg-fn">Ник</label>
+                                <input class="form-control" type="text" name="username" required="">
+                            </div>
+                            <div class="button">
+                                <button class="btn bg-burgundy" type="submit">ПОЛУЧИТЬ КОД</button>
+                            </div>
+                            <p class="outer-link">
+                                Нет аккаунта?
+                                <a href="https://t.me/EasySales07Bot"
+                                   class="text-burgundy" target="_blank">
+                                    Зарегистрируйтесь в боте
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

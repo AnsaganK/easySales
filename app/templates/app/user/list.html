@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Список пользователей
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="breadcrumbs-content d-flex align-items-center">
+                        <h1 class="page-title">Список пользователей</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <ul class="breadcrumb-nav">
+                        <li><a href="{% url 'app:home' %}"><i class="lni lni-home"></i> Главная</a></li>
+                        <li>Список пользователей</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section class="section blog-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-end">
+                                <a href="{% url 'app:user_sending' %}" class="btn btn-outline-primary">
+                                    <i class="lni lni-telegram"></i>
+                                    Рассылка
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ФИО</th>
+                                    <th>Username</th>
+                                    <th>Telegram ID</th>
+                                    <th>Дата добавления</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ user.get_full_name }}</td>
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.profile.telegram_id }}</td>
+                                        <td>{{ user.date_joined }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

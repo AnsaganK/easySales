@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="single-product">
+    <div class="product-image">
+        <img src="{% if product.img %}{{ product.img }}{% else %}{% static 'app/images/no_product.png' %}{% endif %}"
+             alt="#" height="240px">
+        <div class="button">
+            <a href="product-details.html" class="btn"><i
+                    class="lni lni-cart"></i> Добавить в корзину</a>
+        </div>
+    </div>
+    <div class="product-info">
+        <span class="category">{{ product.subcategory.name }}</span>
+        <h4 class="title">
+            <a href="product-grids.html">{{ product.name }}</a>
+        </h4>
+        <div class="price">
+            <span>{{ product.price }} Р.</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Главная
+{% endblock %}
+
+
+{% block content %}
+    <section class="hero-area d-flex justify-content-center align-items-center bg-burgundy text-white p-5 bg-light"
+             style="">
+        <div class="container">
+            <div class="text-center">
+                <h3 class="text-white">Добро пожаловать на наш сайт!</h3>
+                <hr>
+                Мы рады представить вам наш уникальный интернет-магазин, где вы найдете широкий ассортимент товаров,
+                отвечающих
+                самым высоким стандартам качества и удовлетворяющих любые потребности. Наша миссия – сделать ваш шопинг
+                максимально удобным, быстрым и приятным.
+            </div>
+        </div>
+    </section>
+
+    <section class="trending-product section" style="margin-top: 12px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Популярные товары</h2>
+                        <p>Товары, которые наиболее популярны за последние 24 часа</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for product in popular_products %}
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Start Single Product -->
+                        {% include 'app/include/product/grid_card.html' %}
+                        <!-- End Single Product -->
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <section class="shipping-info">
+        <div class="container">
+            <ul>
+                <!-- Free Shipping -->
+                <li>
+                    <div class="media-icon">
+                        <i class="lni lni-delivery text-burgundy"></i>
+                    </div>
+                    <div class="media-body">
+                        <h5>Быстрая доставка</h5>
+                        <span>Бесплатно с 1000 рублей</span>
+                    </div>
+                </li>
+                <!-- Money Return -->
+                <li>
+                    <div class="media-icon">
+                        <i class="lni lni-support text-burgundy"></i>
+                    </div>
+                    <div class="media-body">
+                        <h5>Техподдержка на связи 24/7</h5>
+                        <span>Звоните в любое время</span>
+                    </div>
+                </li>
+                <!-- Support 24/7 -->
+                <li>
+                    <div class="media-icon">
+                        <i class="lni lni-credit-cards text-burgundy"></i>
+                    </div>
+                    <div class="media-body">
+                        <h5>Онлайн оплата</h5>
+                        <span>Все защищено</span>
+                    </div>
+                </li>
+                <!-- Safe Payment -->
+                <li>
+                    <div class="media-icon">
+                        <i class="lni lni-reload text-burgundy"></i>
+                    </div>
+                    <div class="media-body">
+                        <h5>Легкий возврат</h5>
+                        <span>Максимально просто</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
